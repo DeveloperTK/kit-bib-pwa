@@ -6,7 +6,8 @@ Motivation: the KIT website sucks ass
 
 When opening the index page, the different areas are displayed. Those are based on `src/areas.config.js`
 
-Every `AreaCard` fetches some data from the KIT Server. This creates _a lot_ of requests (but is fine i guess 👉👈)
+Every `AreaCard` fetches some data from the KIT Server. <br/>
+This creates _a lot_ of requests (but is fine i guess 👉👈)
 
 ### API "Documentation"
 - `/api/fetch?area=<code>` fetches the booking data for a given `area` (KIT Neubau 1.OG has code `20`)
