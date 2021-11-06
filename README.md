@@ -1,34 +1,25 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# KIT Library Seat-Booking PWA
 
-## Getting Started
+Motivation: the KIT website sucks ass
 
-First, run the development server:
+## What this bad boy does:
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+When opening the index page, the different areas are displayed. Those are based on `src/areas.config.js`
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Every `AreaCard` fetches some data from the KIT Server. This creates _a lot_ of requests (but is fine i guess 👉👈)
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+### API "Documentation"
+- `/api/fetch?area=<code>` fetches the booking data for a given `area` (KIT Neubau 1.OG has code `20`)
+- `/api/book?area=<area>&room=<seat-id>&period=<slot-id>&day=<day>&month=<month>&year=<year>` basically redirects to KIT website
+- `/api/dummy_fetch?area=0` use this when testing (a lot quicker AND you don't spam the KIT servers)
+- `/api/areas` unused, ignore
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## TODO
+- [ ] Fix inconsistent (and sometimes straight up wrong) server time in `/src/Utils.js`
+- [ ] Implement all areas (build some ui for ungrouped areas)
+- [ ] Redo the UI without bootstrap (probably won't happen)
+- [ ] Explain to SCC why their servers get so many requests
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Contributing
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+yes, please
