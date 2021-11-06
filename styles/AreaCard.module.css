@@ -1,0 +1,15 @@
+.danger {
+    background-color: #e03531;
+}
+
+.warning {
+    background-color: #f0bd27;
+}
+
+.success {
+    background-color: #51b364;
+}
+
+.dark {
+    background-color: #212529;
+}

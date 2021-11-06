@@ -1,0 +1,15 @@
+@media (max-width: 400px) {
+    .label {
+        min-width: 120px;
+    }
+}
+
+.label {
+    background-color: #e0ebff;
+    border: 0;
+    border-radius: 0;
+}
+
+.label:focus {
+    background-color: #0d6efd;
+}

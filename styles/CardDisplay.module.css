@@ -1,12 +1,3 @@
-.marginTop {
-    margin-top: 1rem;
-}
-
-.marginBoth {
-    margin-top: 1rem;
-    margin-bottom: 0.5rem;
-}
-
 .cardGrid {
     display: grid;
     grid-gap: .5rem;
