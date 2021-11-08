@@ -29,7 +29,7 @@ export default function AreaCard({ data, slot, host }) {
                 </div>
 
                 <div className="d-flex justify-content-center">
-                    {renderButtonStep(bookingState, setBookingState, maxBookings, data, slot)}
+                    { renderButtonStep(bookingState, setBookingState, maxBookings, currentlyFree, data, slot) }
                 </div>
             </div>
         </div>
@@ -69,10 +69,11 @@ function getCardStyle(current, max) {
     }
 }
 
-function renderButtonStep(bookingState, setBookingState, maxBookings, data, slot) {
+function renderButtonStep(bookingState, setBookingState, maxBookings, currentlyFree, data, slot) {
     switch (bookingState.step) {
         case 0:
-            return <button className={"btn btn-light"} disabled={typeof maxBookings !== 'number' || maxBookings <= 0}
+            console.log(maxBookings);
+            return <button className={"btn btn-light"} disabled={typeof maxBookings !== 'number' || currentlyFree <= 0}
                            onClick={() => bookButton(bookingState, setBookingState,
                                { areaCode: data.code, slot })}>
                 Platz Suchen

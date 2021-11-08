@@ -1,7 +1,8 @@
 import { JSDOM } from "jsdom";
+import { localDateInKTown } from "../../src/utils";
 
 function getURL(day, month, year, area) {
-    return `https://raumbuchung.bibliothek.kit.edu/sitzplatzreservierung/day.php?year=${year}&month=${month}&day=${day}&area=${area}`;
+    return `https://raumbuchung.bibliothek.kit.edu/sitzplatzreservierung/day.php?day=${day}&month=${month}&year=${year}&area=${area}`;
 }
 
 export default async function handler(req, res) {
@@ -10,14 +11,14 @@ export default async function handler(req, res) {
         return
     }
 
-    let now = new Date();
-    let url = getURL(now.getDay(), now.getMonth() + 1, now.getFullYear(), req.query.area);
+    let [day, month, year] = localDateInKTown()
+    let url = getURL(day, month, year, req.query.area)
 
     let timeout = setTimeout(() => {
         res.status(500).json({error: 408, message: "Timeout: did not reach KIT Server in time"})
     }, 10000);
 
-    console.log("fetching: ", url);
+    console.log("fetching: ", url)
 
     await fetch(url)
         .then(response => response.text())
@@ -56,7 +57,7 @@ function parseText(text) {
         headerBlockRoomList.push(headerEntries[i].dataset.room)
     }
 
-    let timeBlocks = [];
+    let timeSlots = [];
     for (let row of bodyRows) {
         let spliceRow = [];
         let currentlyFree = 0;
@@ -66,7 +67,7 @@ function parseText(text) {
             if (row.children[i].classList.contains('new')) currentlyFree++;
         }
 
-        timeBlocks.push({
+        timeSlots.push({
             name: row[0],
             free: currentlyFree,
             data: spliceRow
@@ -76,7 +77,7 @@ function parseText(text) {
     return {
         max: max,
         header: headerBlockRoomList,
-        timeSlots: timeBlocks
+        timeSlots: timeSlots
     }
     
 }
