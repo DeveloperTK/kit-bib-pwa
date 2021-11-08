@@ -1,11 +1,20 @@
 import { JSDOM } from "jsdom";
 import { localDateInKTown } from "../../src/utils";
+import { default as dummy_handler } from "./dummy_fetch";
 
 function getURL(day, month, year, area) {
     return `https://raumbuchung.bibliothek.kit.edu/sitzplatzreservierung/day.php?day=${day}&month=${month}&year=${year}&area=${area}`;
 }
 
 export default async function handler(req, res) {
+    if (process.env.NODE_ENV === 'development') {
+        return await dummy_handler(req, res);
+    } else {
+        return await handler_production(req, res);
+    }
+}
+
+async function handler_production(req, res) {
     if (!req.query.area) {
         res.status(400).json({error: 400, message: "Missing GET parameter 'area'"})
         return

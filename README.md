@@ -14,9 +14,11 @@ This creates _a lot_ of requests (but is fine i guess 👉👈)
 - `/api/book?area=<area>&room=<seat-id>&period=<slot-id>` basically redirects to KIT website
 - `/api/dummy_fetch?area=0` use this when testing (a lot quicker AND you don't spam the KIT servers)
 
+Note: the `/api/fetch` endpoint uses the `/api/dummy_fetch` handler when `NODE_ENV === 'development'`
+
 ## TODO
 - [x] Fix inconsistent (and sometimes straight up wrong) server time in `/src/utils.js`
-- [ ] Implement all areas (build some ui for ungrouped areas)
+- [x] Implement all areas (build some ui for ungrouped areas)
 - [ ] Cache the fetch requests by default for ~60 seconds
 - [ ] Redo the UI without bootstrap (probably won't happen)
 - [ ] Explain to SCC why their servers get so many requests

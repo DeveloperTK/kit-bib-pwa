@@ -3,12 +3,31 @@ import AreaCard from "./AreaCard";
 
 import areaConfig from "../areas.config";
 
-export default function AppMain(props) {
+import styles from '../../styles/CardDisplay.module.css';
+import {localDateInKTown} from "../utils";
+
+export default function AppMain() {
+
+    let timeWarning = <></>
+
+    if (localDateInKTown()[3] >= 24) {
+        timeWarning = <h1 className="container text-center text-danger fw-bold mb-4">
+            Zwischen 0:00 und 6:00 Uhr morgens werden die Buchungen des Vortages angezeigt
+        </h1>
+    }
+
     return (
         <main>
+            { timeWarning }
+
             { areaConfig.groups.map((group) => <AreaGroup key={ group.name } data={ group } />) }
+
             <div className="container mb-4">
-                { areaConfig.areas.map(area => <AreaCard key={ area.code } grouped={ false } data={ area } />) }
+                <h1 className="mb-4">Sonstige Lernplätze</h1>
+
+                <div className={styles.ungroupedGrid}>
+                    { areaConfig.areas.map(area => <AreaCard key={ area.code } data={ area } single />) }
+                </div>
             </div>
         </main>
     )

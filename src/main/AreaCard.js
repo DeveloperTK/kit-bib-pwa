@@ -2,15 +2,21 @@ import { useEffect, useState } from "react";
 import Link from 'next/link';
 import styles from "../../styles/AreaCard.module.css";
 
-export default function AreaCard({ data, slot, host }) {
+export default function AreaCard({ data, slot, host, single }) {
+
+    let [singleSlot, setSingleSlot] = useState(single ? 0 : undefined);
+    const [slotSelectorId, setSlotSelectorId] = useState(null);
+    useEffect(() => setSlotSelectorId(Math.random().toString(16).substr(2, 5)), []);
 
     let [fetchedData, setFetchedData] = useState(null)
     let [bookingState, setBookingState] = useState({ step: 0, room: 0 })
 
+    const getSlot = () => single ? singleSlot : slot;
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => fetchData(host, data.code, setFetchedData), [])
 
-    let currentlyFree = nullSafe(() => fetchedData.timeSlots[slot].free, '--')
+    let currentlyFree = nullSafe(() => fetchedData.timeSlots[getSlot()].free, '--')
     let maxBookings = nullSafe(() => fetchedData.max, '--')
 
     return (
@@ -29,7 +35,8 @@ export default function AreaCard({ data, slot, host }) {
                 </div>
 
                 <div className="d-flex justify-content-center">
-                    { renderButtonStep(bookingState, setBookingState, maxBookings, currentlyFree, data, slot) }
+                    { renderSingleSlotSelector(single, singleSlot, setSingleSlot, data, slotSelectorId) }
+                    { renderButtonStep(bookingState, setBookingState, maxBookings, currentlyFree, data, getSlot()) }
                 </div>
             </div>
         </div>
@@ -72,7 +79,6 @@ function getCardStyle(current, max) {
 function renderButtonStep(bookingState, setBookingState, maxBookings, currentlyFree, data, slot) {
     switch (bookingState.step) {
         case 0:
-            console.log(maxBookings);
             return <button className={"btn btn-light"} disabled={typeof maxBookings !== 'number' || currentlyFree <= 0}
                            onClick={() => bookButton(bookingState, setBookingState,
                                { areaCode: data.code, slot })}>
@@ -134,4 +140,24 @@ function bookButton(bookingState, setBookingState, bookingData) {
             setBookingState({step: 0, room: 0});
             break;
     }
+}
+
+function renderSingleSlotSelector(isSingle, singleSlot, setSingleSlot, data, slotSelectorId) {
+    if (!isSingle) return <></>
+
+    return (
+        <div className="dropdown" style={{marginRight: '.6rem'}}>
+            <button className="btn btn-light dropdown-toggle" type="button" id={slotSelectorId}
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                { nullSafe(() => data.timeSlots[singleSlot].name, "Konfigurationsfehler!") }
+            </button>
+            <ul className="dropdown-menu" aria-labelledby={slotSelectorId}>
+                { nullSafe(() => data.timeSlots, [{name: 'invalid'}]).map((slotData, index) =>
+                    <li key={slotData.name + index}>
+                        <button className="dropdown-item" type="button" onClick={() => setSingleSlot(index)}>{ slotData.name }</button>
+                    </li>
+                )}
+            </ul>
+        </div>
+    )
 }

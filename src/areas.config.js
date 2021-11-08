@@ -1,8 +1,12 @@
+const allWeek = [true, true, true, true, true, true, true]
+const mondayThroughSaturday = [true, true, true, true, true, true, false]
+const mondayThroughFriday = [true, true, true, true, true, false, false]
+
 const areaConfig = {
     groups: [
         {
             name: 'KIT-Bibliothek Süd',
-            openDays: [true, true, true, true, true, true, true],
+            openDays: allWeek,
             timeSlots: [
                 {
                     id: 'kit_sued_0',
@@ -63,7 +67,7 @@ const areaConfig = {
         },
         {
             name: 'Fachbibliothek HKA',
-            openDays: [true, true, true, true, true, true, false],
+            openDays: mondayThroughSaturday,
             timeSlots: [
                 {
                     id: 'hka_0',
@@ -98,9 +102,111 @@ const areaConfig = {
     ],
     areas: [
         {
-            code: 0,
-            name: '',
-            timeSlots: []
+            code: 25,
+            name: 'KIT-Fachbib Mathematik',
+            openDays: mondayThroughFriday,
+            timeSlots: [
+                {
+                    id: 'kit_mathebib_0',
+                    name: 'Vormittag',
+                    from: { hour: 9, minute: 0 },
+                    to: { hour: 13, minute: 0 }
+                },
+                {
+                    id: 'kit_mathebib_1',
+                    name: 'Nachmittag',
+                    from: { hour: 13, minute: 0 },
+                    to: { hour: 16, minute: 0 }
+                }
+            ]
+        },
+        {
+            code: 24,
+            name: 'KIT-Fachbib Physik',
+            openDays: mondayThroughFriday,
+            timeSlots: [
+                {
+                    id: 'kit_physikbib_0',
+                    name: 'Vormittag',
+                    from: { hour: 9, minute: 0 },
+                    to: { hour: 13, minute: 0 }
+                },
+                {
+                    id: 'kit_physikbib_1',
+                    name: 'Nachmittag',
+                    from: { hour: 13, minute: 0 },
+                    to: { hour: 16, minute: 0 }
+                },
+                {
+                    id: 'kit_physikbib_2',
+                    name: 'Abend',
+                    from: { hour: 16, minute: 0 },
+                    to: { hour: 19, minute: 0 }
+                }
+            ]
+        },
+        {
+            code: 26,
+            name: 'KIT-Bib Campus Nord',
+            openDays: mondayThroughFriday,
+            timeSlots: [
+                {
+                    id: 'kit_nord_0',
+                    name: 'Vormittag',
+                    from: { hour: 9, minute: 0 },
+                    to: { hour: 11, minute: 45 }
+                },
+                {
+                    id: 'kit_nord_1',
+                    name: 'Nachmittag',
+                    from: { hour: 12, minute: 0 },
+                    to: { hour: 15, minute: 0 }
+                }
+            ]
+        },
+        {
+            code: 37,
+            name: 'KIT Lernzentrum (Süd)',
+            openDays: allWeek,
+            timeSlots: [
+                {
+                    id: 'kit_lzaf_0', // lzaf = Lernzentrum am Fasanenschloesschen
+                    name: 'Vormittag',
+                    from: { hour: 9, minute: 0 },
+                    to: { hour: 13, minute: 30 }
+                },
+                {
+                    id: 'kit_lzaf_1', // lzaf = Lernzentrum am Fasanenschloesschen
+                    name: 'Nachmittag',
+                    from: { hour: 13, minute: 30 },
+                    to: { hour: 18, minute: 0 }
+                },
+                {
+                    id: 'kit_lzaf_2', // lzaf = Lernzentrum am Fasanenschloesschen
+                    name: 'Abend',
+                    from: { hour: 18, minute: 0 },
+                    to: { hour: 22, minute: 0 }
+                }
+            ]
+        },
+        {
+            code: 32,
+            name: 'DHBW Lernplätze',
+            openDays: mondayThroughFriday,
+            timeSlots: [
+                {
+                    id: 'dhbw_0',
+                    name: 'Vormittag',
+                    from: { hour: 8, minute: 0 },
+                    to: { hour: 11, minute: 45 }
+                },
+                {
+                    id: 'dhbw_1',
+                    name: 'Nachmittag',
+                    from: { hour: 12, minute: 0 },
+                    to: { hour: 16, minute: 0 }
+                }
+            ]
         }
     ]
 }
