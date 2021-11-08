@@ -142,6 +142,14 @@ function bookButton(bookingState, setBookingState, bookingData) {
     }
 }
 
+function slotFromToFormat(slotData) {
+    return `(${fill0(slotData.from.hour)}:${fill0(slotData.to.minute)} - ${fill0(slotData.to.hour)}:${fill0(slotData.to.minute)} Uhr)`
+}
+
+function fill0(n) {
+    return ('00'+n%24).slice(-2);
+}
+
 function renderSingleSlotSelector(isSingle, singleSlot, setSingleSlot, data, slotSelectorId) {
     if (!isSingle) return <></>
 
@@ -154,7 +162,7 @@ function renderSingleSlotSelector(isSingle, singleSlot, setSingleSlot, data, slo
             <ul className="dropdown-menu" aria-labelledby={slotSelectorId}>
                 { nullSafe(() => data.timeSlots, [{name: 'invalid'}]).map((slotData, index) =>
                     <li key={slotData.name + index}>
-                        <button className="dropdown-item" type="button" onClick={() => setSingleSlot(index)}>{ slotData.name }</button>
+                        <button className="dropdown-item" type="button" onClick={() => setSingleSlot(index)}>{ slotData.name + " " + slotFromToFormat(slotData) }</button>
                     </li>
                 )}
             </ul>

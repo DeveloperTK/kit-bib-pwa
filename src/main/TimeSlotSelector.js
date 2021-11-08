@@ -21,11 +21,19 @@ export default function TimeSlotSelector({ timeSlots, selectedSlot, setSlot }) {
                         />
 
                         <label className={"btn btn-outline-primary " + styles.label} htmlFor={slot.id}>
-                            {slot.name}
+                            { slot.name } { slotFromToFormat(slot) }
                         </label>
                     </Fragment>)
                 }
             </div>
         </div>
     );
+}
+
+function slotFromToFormat(slotData) {
+    return `(${fill0(slotData.from.hour)}:${fill0(slotData.to.minute)} - ${fill0(slotData.to.hour)}:${fill0(slotData.to.minute)} Uhr)`
+}
+
+function fill0(n) {
+    return ('00'+n%24).slice(-2);
 }
