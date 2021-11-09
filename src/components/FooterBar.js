@@ -1,4 +1,4 @@
-import { githubLink } from "./utils";
+import { githubLink } from "../utils";
 
 export default function FooterBar() {
     return (

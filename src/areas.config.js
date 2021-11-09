@@ -3,6 +3,7 @@ const mondayThroughSaturday = [true, true, true, true, true, true, false]
 const mondayThroughFriday = [true, true, true, true, true, false, false]
 
 const areaConfig = {
+    requestCacheDuration: process.env.REQUEST_CACHE_DURATION || 1000 * 60, // 60 seconds
     groups: [
         {
             name: 'KIT-Bibliothek Süd',

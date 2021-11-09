@@ -1,5 +1,4 @@
 import React from "react";
-import {GithubIcon} from "./utils";
 
 export default class HeaderBar extends React.Component {
     render() {

@@ -13,6 +13,7 @@
     "child": "^0.0.3",
     "fs": "^0.0.1-security",
     "jsdom": "^18.0.1",
+    "memory-cache": "^0.2.0",
     "next": "12.0.2",
     "next-pwa": "^5.4.0",
     "process": "^0.11.10",

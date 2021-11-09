@@ -1,8 +1,8 @@
 import Head from "next/head";
 
-import AppMain from "../src/main/AppMain";
-import HeaderBar from "../src/HeaderBar";
-import FooterBar from "../src/FooterBar";
+import AppMain from "../src/components/AppMain";
+import HeaderBar from "../src/components/HeaderBar";
+import FooterBar from "../src/components/FooterBar";
 
 export default function Home() {
     return (

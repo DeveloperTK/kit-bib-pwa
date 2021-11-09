@@ -1,16 +1,32 @@
 import { JSDOM } from "jsdom";
 import { localDateInKTown } from "../../src/utils";
 import { default as dummy_handler } from "./dummy_fetch";
+import cacheData from "memory-cache"
+import areaConfig from "../../src/areas.config";
 
 function getURL(day, month, year, area) {
     return `https://raumbuchung.bibliothek.kit.edu/sitzplatzreservierung/day.php?day=${day}&month=${month}&year=${year}&area=${area}`;
 }
 
 export default async function handler(req, res) {
-    if (process.env.NODE_ENV === 'development') {
+    if (process.env.NODE_ENV === 'developments') {
         return await dummy_handler(req, res);
     } else {
         return await handler_production(req, res);
+    }
+}
+
+async function fetchWithCache(url, cached) {
+    let cachedResult = cacheData.get(url);
+
+    if (cached && cachedResult) {
+        console.log("cacheRes: ", url)
+        return cachedResult
+    } else {
+        console.log("fetching: ", url)
+        let response = await (fetch(url).then(response => response.text()))
+        cacheData.put(url, response, areaConfig.requestCacheDuration)
+        return response
     }
 }
 
@@ -20,17 +36,16 @@ async function handler_production(req, res) {
         return
     }
 
+    const cached = (typeof req.query.cached === 'undefined' || req.query.cached);
+
     let [day, month, year] = localDateInKTown()
     let url = getURL(day, month, year, req.query.area)
 
     let timeout = setTimeout(() => {
-        res.status(500).json({error: 408, message: "Timeout: did not reach KIT Server in time"})
+        res.status(408).json({error: 408, message: "Timeout: did not reach KIT Server in time"})
     }, 10000);
 
-    console.log("fetching: ", url)
-
-    await fetch(url)
-        .then(response => response.text())
+    await fetchWithCache(url, cached)
         .then(text => {
             try {
                 clearTimeout(timeout);
@@ -42,7 +57,7 @@ async function handler_production(req, res) {
         })
         .catch(err => {
             clearTimeout(timeout);
-            res.status(500).json({error: 500, message: err})
+            res.status(500).json({error: 500, message: err, note: "top catch"})
         })
 }
 

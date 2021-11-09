@@ -32,7 +32,7 @@ export default function TimeSlotSelector({ timeSlots, selectedSlot, setSlot, dis
 }
 
 function slotFromToFormat(slotData) {
-    return `(${fill0(slotData.from.hour%24)}:${fill0(slotData.to.minute)} - ${fill0(slotData.to.hour%24)}:${fill0(slotData.to.minute)} Uhr)`
+    return `(${fill0(slotData.from.hour%24)}:${fill0(slotData.from.minute)} - ${fill0(slotData.to.hour%24)}:${fill0(slotData.to.minute)} Uhr)`
 }
 
 function fill0(n) {
