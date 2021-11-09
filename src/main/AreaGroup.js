@@ -14,13 +14,15 @@ export default function AreaGroup({ data, timeSlot }) {
         // TODO try and calculate current slot
     }, []);
 
+    const disabled = !data.openDays[new Date().getDay() - 1];
+
     return (
         <div className="container mb-4">
             <h1>{ data.name }</h1>
-            <TimeSlotSelector timeSlots={ data.timeSlots } selectedSlot={ slot } setSlot={ setSlot } />
+            <TimeSlotSelector timeSlots={ data.timeSlots } selectedSlot={ slot } setSlot={ setSlot } disabled={ disabled } />
 
             <div className={GridStyle.cardGrid}>
-                { data.areas.map(area => <AreaCard key={ area.code } data={ area } slot={ slot } />) }
+                { data.areas.map(area => <AreaCard key={ area.code } data={ area } slot={ slot } disabled={ disabled } />) }
             </div>
         </div>
     )

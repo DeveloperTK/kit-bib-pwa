@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import { useEffect } from 'react'
 
 import Head from 'next/head';
+import { GithubIcon, githubLink } from "../src/utils";
 
 function MyApp({ Component, pageProps }) {
   useEffect(() => {
@@ -14,6 +15,13 @@ function MyApp({ Component, pageProps }) {
     <Head>
       <link rel="manifest" href="/manifest.json" />
     </Head>
+
+    <div className="gh-link">
+      <a href={ githubLink } target="_blank" rel="noopener noreferrer">
+        { GithubIcon() }
+      </a>
+    </div>
+
     <Component {...pageProps} />
   </>
 }

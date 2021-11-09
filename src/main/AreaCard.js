@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Link from 'next/link';
 import styles from "../../styles/AreaCard.module.css";
 
-export default function AreaCard({ data, slot, host, single }) {
+export default function AreaCard({ data, slot, disabled, single }) {
 
     let [singleSlot, setSingleSlot] = useState(single ? 0 : undefined);
     const [slotSelectorId, setSlotSelectorId] = useState(null);
@@ -13,8 +13,10 @@ export default function AreaCard({ data, slot, host, single }) {
 
     const getSlot = () => single ? singleSlot : slot;
 
+    useEffect(() => {
+        if (!disabled) fetchData(data.code, setFetchedData)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    useEffect(() => fetchData(host, data.code, setFetchedData), [])
+    }, [])
 
     let currentlyFree = nullSafe(() => fetchedData.timeSlots[getSlot()].free, '--')
     let maxBookings = nullSafe(() => fetchedData.max, '--')
@@ -35,7 +37,7 @@ export default function AreaCard({ data, slot, host, single }) {
                 </div>
 
                 <div className="d-flex justify-content-center">
-                    { renderSingleSlotSelector(single, singleSlot, setSingleSlot, data, slotSelectorId) }
+                    { renderSingleSlotSelector(single, singleSlot, setSingleSlot, data, slotSelectorId, disabled) }
                     { renderButtonStep(bookingState, setBookingState, maxBookings, currentlyFree, data, getSlot()) }
                 </div>
             </div>
@@ -55,7 +57,7 @@ function nullSafe(accessor, or) {
     }
 }
 
-function fetchData(host, areaCode, setFetchedData) {
+function fetchData(areaCode, setFetchedData) {
     // all http request /should/ be directed to https
     // noinspection HttpUrlsUsage
     fetch(`${window.location.protocol}//${window.location.host}/api/fetch?area=${areaCode}`)
@@ -150,16 +152,16 @@ function fill0(n) {
     return ('00'+n%24).slice(-2);
 }
 
-function renderSingleSlotSelector(isSingle, singleSlot, setSingleSlot, data, slotSelectorId) {
+function renderSingleSlotSelector(isSingle, singleSlot, setSingleSlot, data, slotSelectorId, disabled) {
     if (!isSingle) return <></>
 
     return (
         <div className="dropdown" style={{marginRight: '.6rem'}}>
-            <button className="btn btn-light dropdown-toggle" type="button" id={slotSelectorId}
-                    data-bs-toggle="dropdown" aria-expanded="false">
+            <button className="btn btn-light dropdown-toggle" type="button" id={ slotSelectorId }
+                    data-bs-toggle="dropdown" aria-expanded="false" disabled={ disabled }>
                 { nullSafe(() => data.timeSlots[singleSlot].name, "Konfigurationsfehler!") }
             </button>
-            <ul className="dropdown-menu" aria-labelledby={slotSelectorId}>
+            <ul className="dropdown-menu" aria-labelledby={ slotSelectorId }>
                 { nullSafe(() => data.timeSlots, [{name: 'invalid'}]).map((slotData, index) =>
                     <li key={slotData.name + index}>
                         <button className="dropdown-item" type="button" onClick={() => setSingleSlot(index)}>{ slotData.name + " " + slotFromToFormat(slotData) }</button>

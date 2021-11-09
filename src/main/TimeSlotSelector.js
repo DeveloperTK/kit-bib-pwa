@@ -1,7 +1,7 @@
 import * as styles from '../../styles/TimeSlotSelector.module.css';
 import {Fragment, useEffect, useState} from "react";
 
-export default function TimeSlotSelector({ timeSlots, selectedSlot, setSlot }) {
+export default function TimeSlotSelector({ timeSlots, selectedSlot, setSlot, disabled }) {
     const [uniqueName, setUniqueName] = useState(null);
     useEffect(() => setUniqueName(Math.random().toString(16).substr(2, 5)), []);
 
@@ -17,7 +17,8 @@ export default function TimeSlotSelector({ timeSlots, selectedSlot, setSlot }) {
                             id={ slot.id }
                             autoComplete="off"
                             onChange={() => setSlot(index)}
-                            defaultChecked={ selectedSlot === index }
+                            defaultChecked={ !disabled && selectedSlot === index }
+                            disabled={ disabled }
                         />
 
                         <label className={"btn btn-outline-primary " + styles.label} htmlFor={slot.id}>

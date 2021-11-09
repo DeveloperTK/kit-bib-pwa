@@ -17,3 +17,17 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.gh-link {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 99;
+  background-color: white;
+  border-radius: .5rem;
+  padding: .5rem;
+
+  -webkit-box-shadow: 0 0 .5rem 0 rgba(0,0,0,0.75);
+  -moz-box-shadow: 0 0 .5rem 0 rgba(0,0,0,0.75);
+  box-shadow: 0 0 .5rem 0 rgba(0,0,0,0.75);
+}
