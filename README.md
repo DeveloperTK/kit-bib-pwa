@@ -19,6 +19,7 @@ Note: the `/api/fetch` endpoint uses the `/api/dummy_fetch` handler when `NODE_E
 ## TODO
 - [x] Fix inconsistent (and sometimes straight up wrong) server time in `/src/utils.js`
 - [x] Implement all areas (build some ui for ungrouped areas)
+- [ ] Do SEO and better enforce SSR and SSG with next
 - [ ] Cache the fetch requests by default for ~60 seconds
 - [ ] Redo the UI without bootstrap (probably won't happen)
 - [ ] Explain to SCC why their servers get so many requests

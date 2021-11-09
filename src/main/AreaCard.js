@@ -145,11 +145,11 @@ function bookButton(bookingState, setBookingState, bookingData) {
 }
 
 function slotFromToFormat(slotData) {
-    return `(${fill0(slotData.from.hour)}:${fill0(slotData.to.minute)} - ${fill0(slotData.to.hour)}:${fill0(slotData.to.minute)} Uhr)`
+    return `(${fill0(slotData.from.hour%24)}:${fill0(slotData.to.minute)} - ${fill0(slotData.to.hour%24)}:${fill0(slotData.to.minute)} Uhr)`
 }
 
 function fill0(n) {
-    return ('00'+n%24).slice(-2);
+    return ('00'+n).slice(-2);
 }
 
 function renderSingleSlotSelector(isSingle, singleSlot, setSingleSlot, data, slotSelectorId, disabled) {
