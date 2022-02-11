@@ -24,7 +24,11 @@ async function fetchWithCache(url, cached) {
         return cachedResult
     } else {
         console.log("fetching: ", url)
-        let response = await (fetch(url).then(response => response.text()))
+        let response = await (fetch(url, {
+            headers: {
+                'User-Agent': 'kit-bib-pwa/1 (i am a bot or a teapot)'
+            }
+        }).then(response => response.text()))
         cacheData.put(url, response, areaConfig.requestCacheDuration)
         return response
     }
