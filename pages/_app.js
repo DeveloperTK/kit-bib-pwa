@@ -13,7 +13,6 @@ function MyApp({Component, pageProps}) {
 
     return <>
         <Head>
-            <html lang="de-DE" />
             <title>KIT Bibliothek Sitzplatz-Reservierung</title>
 
             <link rel="manifest" href="/manifest.json"/>
