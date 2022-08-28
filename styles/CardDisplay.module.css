@@ -12,6 +12,13 @@
     grid-template-columns: repeat(1, 1fr);
 }
 
+.largeGrid {
+    display: grid;
+    grid-gap: .5rem;
+    grid-row-gap: .5rem;
+    grid-template-columns: repeat(1, 1fr);
+}
+
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
     .cardGrid {
@@ -19,6 +26,10 @@
     }
 
     .ungroupedGrid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .largeGrid {
         grid-template-columns: repeat(1, 1fr);
     }
 }
@@ -32,6 +43,10 @@
     .ungroupedGrid {
         grid-template-columns: repeat(2, 1fr);
     }
+
+    .largeGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 /* X-Large devices (large desktops, 1200px and up) */
@@ -43,6 +58,10 @@
     .ungroupedGrid {
         grid-template-columns: repeat(3, 1fr);
     }
+
+    .largeGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 /* XX-Large devices (larger desktops, 1400px and up) */
@@ -53,5 +72,9 @@
 
     .ungroupedGrid {
         grid-template-columns: repeat(3, 1fr);
+    }
+
+    .largeGrid {
+        grid-template-columns: repeat(2, 1fr);
     }
 }

@@ -11,11 +11,11 @@
  *
  * @returns {number[]} [day, month, year] while month is 1-12 and NOT 0-11
  */
-export function localDateInKTown() {
+export function localDateInKTown(forcedDate?: Date) {
 
     let formatString = new Intl
         .DateTimeFormat('de-DE', { timeZone: "Europe/Berlin", dateStyle: 'medium', timeStyle: 'short' })
-        .format(Date.now())
+        .format(forcedDate || Date.now())
 
     let [date, time] = formatString
         .replace(/\s/g, '')
@@ -24,7 +24,7 @@ export function localDateInKTown() {
     let [day, month, year] = date.split('.').map(a => Number(a));
     let [hour, minute] = time.split(':').map(a => Number(a));
 
-    if (hour < 6) {
+    if (hour < 8) {
         let date = new Date(year, month - 1, day, hour, minute)
         date.setDate(date.getDate() - 1);
         [day, month, year, hour, minute] = [date.getDate(), date.getMonth() + 1, date.getFullYear(),
@@ -32,6 +32,36 @@ export function localDateInKTown() {
     }
 
     return [day, month, year, hour, minute]
+}
+
+export function defaultDate(forcedDate?: Date) {
+    let [day, month, year] = localDateInKTown(forcedDate || undefined);
+    return (
+        year
+        + "-"
+        + String(month).padStart(2, '0')
+        + "-"
+        + String(day).padStart(2, '0')
+    )
+}
+
+/**
+ * IMPORTANT: This is only teporary and works as long as the times don't change
+ */
+export function __currentSlot() {
+    let timeString = new Intl.DateTimeFormat('de-DE', { timeZone: "Europe/Berlin", timeStyle: 'short' }).format(Date.now())
+    let hour = Number(timeString.split(':')[0])
+    if (hour < 8) {
+        return 3
+    } else if (hour < 13) {
+        return 0
+    } else if (hour < 18) {
+        return 1
+    } else if (hour < 22) {
+        return 2
+    } else {
+        return 3
+    }
 }
 
 export function GithubIcon() {

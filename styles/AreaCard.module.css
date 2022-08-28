@@ -4,6 +4,7 @@
 
 .warning {
     background-color: #f0bd27;
+    color: #212529 !important;
 }
 
 .success {

@@ -1,16 +1,10 @@
-import '../styles/globals.css'
-import 'bootstrap/dist/css/bootstrap.css'
+import AppContextWrapper from '@/src/AppContext';
+import '@/styles/globals.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { useEffect } from 'react'
 import Head from 'next/head';
 
-import { GithubIcon, githubLink } from "../src/utils";
-
-function MyApp({Component, pageProps}) {
-    useEffect(() => {
-        typeof document !== undefined ? require('bootstrap/dist/js/bootstrap') : null
-    }, [])
-
+const MyApp = ({Component, pageProps}) => {
     return <>
         <Head>
             <title>KIT Bibliothek Sitzplatz-Reservierung</title>
@@ -49,27 +43,10 @@ function MyApp({Component, pageProps}) {
             <meta name="twitter:description" content="Einfaches Tool zum Finden und Buchen von Lernplätzen für Studenten des KIT und den Karlsruher Hochschulen" />
         </Head>
 
-        <div className="gh-link">
-            <a href={githubLink} target="_blank" rel="noopener noreferrer">
-                {GithubIcon()}
-            </a>
-        </div>
-
-        {/*
-
-        Temporarily disabled
-
-        <Component {...pageProps} />
-
-        */}
-
-        <div style={{position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center'}}>
-            <h1>503: Service Unavailable</h1>
-            <p>
-                This page was blocked, I am working on getting it fixed again.
-            </p>
-        </div>
+        <AppContextWrapper>
+            <Component {...pageProps} />
+        </AppContextWrapper>
     </>
 }
 
-export default MyApp
+export default MyApp;

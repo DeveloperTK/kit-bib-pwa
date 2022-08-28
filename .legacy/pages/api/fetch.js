@@ -1,5 +1,5 @@
 import { JSDOM } from "jsdom";
-import { localDateInKTown } from "../../src/utils";
+import { localDateInKTown } from "../../../src/utils";
 import { default as dummy_handler } from "./dummy_fetch";
 import cacheData from "memory-cache"
 import areaConfig from "../../src/areas.config";
@@ -9,6 +9,18 @@ function getURL(day, month, year, area) {
 }
 
 export default async function handler(req, res) {
+    if (true) {
+        res.status(410).json({ error: 410, message: "Gone" });
+        return;
+    }
+
+    return res.json({
+        error: "This endpoint is deprecated since the User-Agent tied to it was blocked :(",
+        max: 0,
+        header: [],
+        timeSlots: [],
+    });
+
     if (process.env.NODE_ENV === 'developments') {
         return await dummy_handler(req, res);
     } else {
@@ -26,7 +38,7 @@ async function fetchWithCache(url, cached) {
         console.log("fetching: ", url)
         let response = await (fetch(url, {
             headers: {
-                'User-Agent': 'kit-bib-pwa/1 (i am a bot or a teapot)'
+                'User-Agent': 'kit-bib-pwa/1 (this was blocked, bruh)'
             }
         }).then(response => response.text()))
         cacheData.put(url, response, areaConfig.requestCacheDuration)

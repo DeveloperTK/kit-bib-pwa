@@ -1,4 +1,4 @@
-import * as styles from '../../styles/TimeSlotSelector.module.css';
+import * as styles from '@/styles/TimeSlotSelector.module.css';
 import {Fragment, useEffect, useState} from "react";
 
 export default function TimeSlotSelector({ timeSlots, selectedSlot, setSlot, disabled }) {

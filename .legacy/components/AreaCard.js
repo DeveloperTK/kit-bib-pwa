@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import Link from 'next/link';
-import styles from "../../styles/AreaCard.module.css";
+import styles from "@/styles/AreaCard.module.css";
 
 export default function AreaCard({ data, slot, disabled, single }) {
 

@@ -1,6 +1,7 @@
-import { githubLink } from "../utils";
+import React from "react";
+import { githubLink } from "@/src/utils";
 
-export default function FooterBar() {
+const FooterBar: React.FC = () => {
     return (
         <footer className="bg-dark text-white py-3 mt-4 mt-auto">
             <ul className="nav justify-content-center border-bottom pb-3 mb-3">
@@ -17,3 +18,5 @@ export default function FooterBar() {
         </footer>
     )
 }
+
+export default FooterBar;

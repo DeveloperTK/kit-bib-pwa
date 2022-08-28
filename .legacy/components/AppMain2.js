@@ -1,12 +1,12 @@
-import AreaGroup from "./AreaGroup";
-import AreaCard from "./AreaCard";
+import AreaGroup from "@/components/AreaGroup";
+import AreaCard from "@/components/AreaCard";
 
-import areaConfig from "../areas.config";
+import areaConfig from "@/src/areas.config";
 
-import styles from '../../styles/CardDisplay.module.css';
-import { localDateInKTown } from "../utils";
+import styles from '@/styles/CardDisplay.module.css';
+import { localDateInKTown } from "@/src/utils";
 
-export default function AppMain() {
+export default function AppMain2() {
 
     let timeWarning = <></>
 

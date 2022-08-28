@@ -1,7 +1,7 @@
-import AreaCard from "./AreaCard";
+import AreaCard from "@/components/AreaCard";
 import { useEffect, useState } from "react";
-import TimeSlotSelector from "./TimeSlotSelector";
-import * as GridStyle from '../../styles/CardDisplay.module.css';
+import TimeSlotSelector from "@/components/TimeSlotSelector";
+import * as GridStyle from '@/styles/CardDisplay.module.css';
 
 export default function AreaGroup({ data, timeSlot }) {
     let [slot, setSlot] = useState(0);

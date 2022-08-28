@@ -1,4 +1,4 @@
-import { localDateInKTown } from "../../src/utils";
+import { localDateInKTown } from "../../../src/utils";
 
 export default async function handler(req, res) {
     let [day, month, year] = localDateInKTown()
